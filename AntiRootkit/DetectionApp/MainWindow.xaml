@@ -1,0 +1,87 @@
+﻿<Window x:Class="DetectionApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DetectionApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="1030">
+    <Grid>
+        <TabControl>
+            <TabItem Width="168" Height="30" FontSize="15" Header="Home">
+                <Grid>
+                    <Button x:Name="Btn" Width="200" Height="100" FontSize="20">Perform Scan</Button>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Width="168" Height="30" FontSize="15" Header="IAT">
+                <ListView Margin="10" x:Name="IatList">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="378" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Pid" Width="378" DisplayMemberBinding="{Binding Pid}" />
+                            <GridViewColumn Header="Hooked" Width="378" DisplayMemberBinding="{Binding Hooked}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+
+            <TabItem Width="168" Height="30" FontSize="15" Header="Kernel IAT">
+                <ListView Margin="10" x:Name="KiatList">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="567" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Hooked" Width="567" DisplayMemberBinding="{Binding Hooked}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+
+            <!--<TabItem Width="168" Height="30" FontSize="15" Header="Inline">
+                <ListView Margin="10" x:Name="InlineList">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="567" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Hooked" Width="567" DisplayMemberBinding="{Binding Hooked}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>-->
+
+            <TabItem Width="168" Height="30" FontSize="15" Header="SSDT">
+                <ListView Margin="10" x:Name="SsdtList">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" Width="567" DisplayMemberBinding="{Binding Id}" />
+                            <!--<GridViewColumn Header="Name" Width="378" DisplayMemberBinding="{Binding Name}" />-->
+                            <GridViewColumn Header="Hooked" Width="567" DisplayMemberBinding="{Binding Hooked}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+
+            <TabItem Width="168" Height="30" FontSize="15" Header="IRP">
+                <ListView Margin="10" x:Name="IrpList">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="567" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Hooked" Width="567" DisplayMemberBinding="{Binding Hooked}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+
+            <TabItem Width="168" Height="30" FontSize="15" Header="IDT">
+                <ListView Margin="10" x:Name="IdtList">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="InterruptId" Width="567" DisplayMemberBinding="{Binding InterruptId}" />
+                            <GridViewColumn Header="Hooked" Width="567" DisplayMemberBinding="{Binding Hooked}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

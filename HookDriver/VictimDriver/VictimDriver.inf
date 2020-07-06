@@ -1,0 +1,86 @@
+;
+; VictimDriver.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=VictimDriver.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+VictimDriver_Device_CoInstaller_CopyFiles = 11
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+VictimDriver.sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%VictimDriver.DeviceDesc%=VictimDriver_Device, Root\VictimDriver ; TODO: edit hw-id
+
+[VictimDriver_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+VictimDriver.sys
+
+;-------------- Service installation
+[VictimDriver_Device.NT.Services]
+AddService = VictimDriver,%SPSVCINST_ASSOCSERVICE%, VictimDriver_Service_Inst
+
+; -------------- VictimDriver driver install sections
+[VictimDriver_Service_Inst]
+DisplayName    = %VictimDriver.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\VictimDriver.sys
+
+;
+;--- VictimDriver_Device Coinstaller installation ------
+;
+
+[VictimDriver_Device.NT.CoInstallers]
+AddReg=VictimDriver_Device_CoInstaller_AddReg
+CopyFiles=VictimDriver_Device_CoInstaller_CopyFiles
+
+[VictimDriver_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[VictimDriver_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[VictimDriver_Device.NT.Wdf]
+KmdfService =  VictimDriver, VictimDriver_wdfsect
+[VictimDriver_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "VictimDriver Installation Disk"
+VictimDriver.DeviceDesc = "VictimDriver Device"
+VictimDriver.SVCDESC = "VictimDriver Service"
