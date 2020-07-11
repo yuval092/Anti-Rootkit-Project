@@ -26,7 +26,7 @@ The main focus of this tool is to detect different hooking techniques,  both in 
 ## To Do
 
 - Detect More Hooks (MSR, Inline)
-- Detect Process Injection Techniques (DLL Injections, AtomBombing...)
+- Detect Process Injection Techniques (DLL Injections, AtomBombing, StackBombing...)
 - Detect Evasion Techniques (Process Hollowing, Process Doppelgänging...)
 
 
